@@ -19,7 +19,7 @@ import java.util.Optional;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @RestController
-@RequestMapping("/cliente")
+@RequestMapping("/clientes")
 @CacheConfig(cacheNames = "clientes")
 @Slf4j
 @Tag(name = "Cliente", description = "Gerenciamento de clientes")
