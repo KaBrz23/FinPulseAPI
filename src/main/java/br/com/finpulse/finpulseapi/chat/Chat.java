@@ -20,18 +20,18 @@ public class Chat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    Long id;
 
     @NotNull
     @Column(name = "user_id")
-    private Long userId;
+    Long userId;
 
     @NotNull
     @Column(name = "title")
-    private String title;
+    String title;
 
     @NotNull
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    LocalDateTime createdAt;
 }
 

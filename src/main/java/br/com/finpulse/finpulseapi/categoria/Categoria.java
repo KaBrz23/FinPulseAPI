@@ -20,17 +20,17 @@ public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    Long id;
 
     @NotNull
     @Column(name = "user_id")
-    private Long userId;
+    Long userId;
 
     @NotNull
     @Column(name = "nome")
-    private String nome;
+    String nome;
 
     @NotNull
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    LocalDateTime createdAt;
 }

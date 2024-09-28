@@ -23,39 +23,39 @@ public class Gasto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    Long id;
 
     @NotNull
     @Column(name = "user_id")
-    private Long userId;
+    Long userId;
 
     @NotNull
     @NotBlank
     @Column(name = "descricao")
-    private String descricao;
+    String descricao;
 
     @NotNull
     @Column(name = "valor")
-    private BigDecimal valor;
+    BigDecimal valor;
 
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_pagamento")
-    private TipoPagamento tipoPagamento;
+    TipoPagamento tipoPagamento;
 
     @Column(name = "quantidade_parcelas")
-    private Integer quantidadeParcelas;
+    Integer quantidadeParcelas;
 
     @Column(name = "categoria_id")
-    private Long categoriaId;
+    Long categoriaId;
 
     @NotNull
     @Column(name = "data_inicio")
-    private LocalDate dataInicio;
+    LocalDate dataInicio;
 
     @NotNull
     @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
+    LocalDateTime createdAt;
 
     public enum TipoPagamento {
         RECORRENTE, PARCELADO

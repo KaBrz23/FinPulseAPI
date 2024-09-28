@@ -21,28 +21,28 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    Long id;
 
     @NotNull
     @Column(name = "chat_id")
-    private Long chatId;
+    Long chatId;
 
     @Column(name = "user_id")
-    private Long userId;
+    Long userId;
 
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private Role role;
+    Role role;
 
     @NotNull
     @NotBlank
     @Column(name = "content")
-    private String content;
+    String content;
 
     @NotNull
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    LocalDateTime createdAt;
 
     public enum Role {
         USER, ASSISTANT

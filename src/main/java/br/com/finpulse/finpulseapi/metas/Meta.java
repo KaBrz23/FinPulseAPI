@@ -21,17 +21,17 @@ public class Meta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    Long id;
 
     @NotNull
     @Column(name = "user_id")
-    private Long userId;
+    Long userId;
 
     @NotNull
     @Column(name = "meta_faturamento")
-    private BigDecimal metaFaturamento;
+    BigDecimal metaFaturamento;
 
     @NotNull
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    LocalDateTime createdAt;
 }

@@ -23,35 +23,35 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    Long id;
 
     @NotNull
     @NotBlank
     @Column(name = "nome")
-    private String nome;
+    String nome;
 
     @NotNull
     @Email
     @NotBlank
     @Column(name = "email")
-    private String email;
+    String email;
 
     @NotNull
     @NotBlank
     @Size(min = 11, max = 14)
     @Column(name = "cpf")
-    private String cpf;
+    String cpf;
 
     @Column(name = "telefone")
-    private String telefone;
+    String telefone;
 
     @NotNull
     @Column(name = "data_cadastro")
-    private LocalDateTime dataCadastro;
+    LocalDateTime dataCadastro;
 
     @NotNull
     @NotBlank
     @Size(min = 8, max = 255)
     @Column(name = "senha")
-    private String senha;
+    String senha;
 }

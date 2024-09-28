@@ -22,44 +22,44 @@ public class Filial {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    Long id;
 
     @NotNull
     @Column(name = "id_empresa")
-    private Long idEmpresa;
+    Long idEmpresa;
 
     @NotNull
     @NotBlank
     @Size(min = 14, max = 20)
     @Column(name = "cnpj")
-    private String cnpj;
+    String cnpj;
 
     @Column(name = "inscricao_estadual")
-    private String inscricaoEstadual;
+    String inscricaoEstadual;
 
     @Column(name = "inscricao_municipal")
-    private String inscricaoMunicipal;
+    String inscricaoMunicipal;
 
     @Column(name = "telefone")
-    private String telefone;
+    String telefone;
 
     @Column(name = "endereco")
-    private String endereco;
+    String endereco;
 
     @Column(name = "cidade")
-    private String cidade;
+    String cidade;
 
     @Column(name = "estado")
-    private String estado;
+    String estado;
 
     @Column(name = "cep")
-    private String cep;
+    String cep;
 
     @NotNull
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    LocalDateTime createdAt;
 
     @NotNull
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    LocalDateTime updatedAt;
 }

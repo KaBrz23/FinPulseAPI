@@ -22,37 +22,37 @@ public class Lancamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    Long id;
 
     @NotNull
     @Column(name = "id_usuario")
-    private Long idUsuario;
+    Long idUsuario;
 
     @NotNull
     @NotBlank
     @Column(name = "identificador")
-    private String identificador;
+    String identificador;
 
     @NotNull
     @Column(name = "valor")
-    private BigDecimal valor;
+    BigDecimal valor;
 
     @NotNull
     @Column(name = "data")
-    private LocalDate data;
+    LocalDate data;
 
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo")
-    private Tipo tipo;
+    Tipo tipo;
 
     @NotNull
     @Column(name = "criado_em", updatable = false)
-    private LocalDateTime criadoEm;
+    LocalDateTime criadoEm;
 
     @NotNull
     @Column(name = "atualizado_em")
-    private LocalDateTime atualizadoEm;
+    LocalDateTime atualizadoEm;
 
     public enum Tipo {
         ENTRADA, SAIDA
