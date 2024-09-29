@@ -1,11 +1,10 @@
 package br.com.finpulse.finpulseapi.gasto;
 
-import br.com.finpulse.finpulseapi.filial.Filial;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class GastoService {
@@ -13,8 +12,9 @@ public class GastoService {
     @Autowired
     private GastoRepository repository;
 
-    public List<Gasto> findAll() {
-        return repository.findAll();
+    // Paginação para evitar o retorno de grandes volumes de dados
+    public Page<Gasto> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     public Gasto create(Gasto gasto) {
