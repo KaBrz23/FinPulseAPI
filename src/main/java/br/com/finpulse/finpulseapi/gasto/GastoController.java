@@ -11,9 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import lombok.extern.slf4j.Slf4j;
-import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.NO_CONTENT;
@@ -31,8 +32,8 @@ public class GastoController {
     @GetMapping
     @Cacheable
     @Operation(summary = "Listar todos os gastos")
-    public List<Gasto> findAll() {
-        return gastoService.findAll();
+    public ResponseEntity<Page<Gasto>> findAll(Pageable pageable) {
+        return ResponseEntity.ok(gastoService.findAll(pageable));
     }
 
     @GetMapping("{id}")
