@@ -22,13 +22,13 @@ public class AuthController {
     @PostMapping("/login")
     public Token login(@RequestBody Credentials credentials){
 
-        var user = clienteRepository.findByEmail(credentials.email())
+        var cliente = clienteRepository.findByEmail(credentials.email())
                 .orElseThrow(() -> new RuntimeException("Access Denied"));
 
-        if ( !passwordEncoder.matches(credentials.senha(), user.getSenha()) )
+        if ( !passwordEncoder.matches(credentials.senha(), cliente.getSenha()) )
             throw new RuntimeException("Access Denied");
 
-        return tokenService.create(user);
+        return tokenService.create(cliente);
     }
 
 }

@@ -1,7 +1,10 @@
 package br.com.finpulse.finpulseapi.cliente;
 
+import br.com.finpulse.finpulseapi.cliente.dto.ClienteProfileResponse;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,13 +13,22 @@ import java.util.List;
 public class ClienteService {
     @Autowired
     private ClienteRepository repository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public List<Cliente> findAll() {
         return repository.findAll();
     }
 
     public Cliente create(Cliente cliente) {
+        cliente.setSenha(passwordEncoder.encode(cliente.getSenha()));
         return repository.save(cliente);
+    }
+
+    public ClienteProfileResponse getUserProfile(String email) {
+        return repository.findByEmail(email)
+                .map(ClienteProfileResponse::new)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
     public Cliente getById(Long id) {
@@ -31,6 +43,11 @@ public class ClienteService {
         existingCliente.setCpf(updatedCliente.getCpf());
         existingCliente.setTelefone(updatedCliente.getTelefone());
         existingCliente.setSenha(updatedCliente.getSenha());
+
+        if (updatedCliente.getSenha() != null && !updatedCliente.getSenha().isEmpty()) {
+            existingCliente.setSenha(passwordEncoder.encode(updatedCliente.getSenha()));
+        }
+
         return repository.save(existingCliente);
     }
 

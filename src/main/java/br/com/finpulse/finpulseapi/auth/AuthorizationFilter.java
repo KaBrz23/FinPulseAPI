@@ -47,12 +47,12 @@ public class AuthorizationFilter extends OncePerRequestFilter {
         try {
             //token valido ?
             var token = header.replace("Bearer ", "");
-            Cliente user = tokenService.getUserFromToken(token);
+            Cliente cliente = tokenService.getUserFromToken(token);
 
             //autorizar !
             var auth = new UsernamePasswordAuthenticationToken(
-                    user.getEmail(),
-                    user.getSenha(),
+                    cliente.getEmail(),
+                    cliente.getSenha(),
                     List.of(new SimpleGrantedAuthority("USER"))
             );
             SecurityContextHolder.getContext().setAuthentication(auth);

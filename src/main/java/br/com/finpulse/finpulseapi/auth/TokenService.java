@@ -21,12 +21,12 @@ public class TokenService {
         algorithm = Algorithm.HMAC256(secret);
     }
 
-    public Token create(Cliente user){
+    public Token create(Cliente cliente){
         var expiresAt = LocalDateTime.now().plusHours(1).toInstant(ZoneOffset.ofHours(-3));
 
         String token = JWT.create()
                 .withIssuer("finpulse")
-                .withSubject(user.getEmail())
+                .withSubject(cliente.getEmail())
                 .withClaim("role", "admin")
                 .withExpiresAt(expiresAt)
                 .sign(algorithm);

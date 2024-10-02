@@ -1,5 +1,6 @@
 package br.com.finpulse.finpulseapi.cliente;
 
+import br.com.finpulse.finpulseapi.cliente.dto.ClienteProfileResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -10,9 +11,12 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.util.UriComponentsBuilder;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +45,13 @@ public class ClienteController {
         return ResponseEntity.of(Optional.ofNullable(clienteService.getById(id)));
     }
 
+    @GetMapping("profile")
+    @Operation(summary = "Obter perfil do cliente pelo email")
+    public ClienteProfileResponse getUserProfile(){
+        var email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        return clienteService.getUserProfile(email);
+    }
+
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     @CacheEvict(allEntries = true)
@@ -49,14 +60,18 @@ public class ClienteController {
             @ApiResponse(responseCode = "201"),
             @ApiResponse(responseCode = "400")
     })
-    public ResponseEntity<Cliente> create(@RequestBody Cliente cliente) {
-        Cliente createdCliente = clienteService.create(cliente);
-        var uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(createdCliente.getId())
+    public ResponseEntity<Cliente> create(@RequestBody Cliente cliente, UriComponentsBuilder uriBuilder) {
+        clienteService.create(cliente);
+
+        var uri = uriBuilder
+                .path("/usuario/{id}")
+                .buildAndExpand(cliente.getId())
                 .toUri();
 
-        return ResponseEntity.created(uri).body(createdCliente);
+        return ResponseEntity
+                .created(uri)
+                .body(cliente);
+
     }
 
     @DeleteMapping("{id}")
@@ -82,10 +97,10 @@ public class ClienteController {
             @ApiResponse(responseCode = "401"),
             @ApiResponse(responseCode = "404")
     })
-    public ResponseEntity<Cliente> update(@PathVariable Long id, @RequestBody Cliente updatedCliente) {
-        log.info("Atualizando cliente com id {} para {}", id, updatedCliente);
-        Cliente cliente = clienteService.update(id, updatedCliente);
-        return ResponseEntity.ok(cliente);
+    public ResponseEntity<Cliente> update(@PathVariable Long id, @RequestBody Cliente cliente) {
+        log.info("Atualizando cliente com id {} para {}", id, cliente);
+        Cliente updatedCliente = clienteService.update(id, cliente);
+        return ResponseEntity.ok(updatedCliente);
     }
 }
 

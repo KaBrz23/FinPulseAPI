@@ -1,6 +1,5 @@
 package br.com.finpulse.finpulseapi.message;
 
-import br.com.finpulse.finpulseapi.filial.Filial;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
